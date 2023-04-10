@@ -11,7 +11,7 @@ class QuizService {
 
   static Future<List<QuizQuestions>> getLevelQuestions(String category, int level, int count, double precentage, {onSuccess}) async {
     List<QuizQuestions> questions = [];
-    showProgressDialog();
+    // showProgressDialog();
     await api.normalRequest(
       Services.getLevelQuestions,
       "POST",

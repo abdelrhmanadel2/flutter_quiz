@@ -45,15 +45,15 @@ class QuizPage extends StatelessWidget {
                               style: Get.textTheme.headlineMedium,
                             ),
                           ]),
-                          SizedBox(height: 10),
-                          if (controller.loading == false)
-                            Align(
-                              alignment: Alignment.bottomRight,
-                              child: OutlinedButton.icon(
-                                  onPressed: controller.goToNextQuestion,
-                                  label: const Text("Next"),
-                                  icon: const Icon(Icons.arrow_forward_ios_rounded)),
-                            ),
+                          // SizedBox(height: 10),
+                          // if (controller.loading == false)
+                          //   Align(
+                          //     alignment: Alignment.bottomRight,
+                          //     child: OutlinedButton.icon(
+                          //         onPressed: controller.goToNextQuestion,
+                          //         label: const Text("Next"),
+                          //         icon: const Icon(Icons.arrow_forward_ios_rounded)),
+                          //   ),
                         ],
                       ),
                     ),

@@ -39,7 +39,7 @@ class _QuestionCardState extends State<QuestionCard> {
           children: [
             CachedNetworkImage(
               height: 140,
-              width: 200,
+              // width: 200,
               fit: BoxFit.contain,
               imageUrl: widget.question.questionImg ?? "",
               progressIndicatorBuilder: (context, url, downloadProgress) =>

@@ -108,10 +108,10 @@ class QuizController extends GetxController {
     loading = true;
     update();
     questionCount = (currentLevel == 1)
-        ? 20
+        ? 10
         : (currentLevel == 2)
-            ? 20
-            : 10;
+            ? 15
+            : 5;
     await QuizService.getLevelQuestions(user.category!, currentLevel, questionCount, calculateprecentage(), onSuccess: (data) {
       levelQuestions.addAll(data);
       quiz.result?.questionsCount = levelQuestions.length;
