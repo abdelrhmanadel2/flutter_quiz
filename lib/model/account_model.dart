@@ -1,16 +1,16 @@
 class AccountModel {
   String? sId;
-  int? age;
-  String? category;
+  String? type;
+  String? email;
   String? name;
   String? password;
 
-  AccountModel({this.sId, this.age, this.name, this.password, this.category});
+  AccountModel({this.sId, this.email, this.name, this.password, this.type});
 
   AccountModel.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
-    age = json['age'];
-    category = json['age'] > 10 ? "adult" : "kids";
+    type = json['type'];
+    email = json['email'];
     name = json['name'];
     password = json['password'];
   }
@@ -18,7 +18,8 @@ class AccountModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = sId;
-    data['age'] = age;
+    data['email'] = email;
+    data['type'] = type;
     data['name'] = name;
     data['password'] = password;
     return data;

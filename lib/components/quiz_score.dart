@@ -20,14 +20,14 @@ class QuizScore extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Name: ${user.name}",
-              style: blackTextStyle.copyWith(fontSize: 24, fontWeight: bold),
-            ),
-            Text(
-              'Age :${user.age!} Years',
-              style: blackTextStyle.copyWith(fontSize: 20, fontWeight: bold),
-            ),
+            // Text(
+            //   "Name: ${user.name}",
+            //   style: blackTextStyle.copyWith(fontSize: 24, fontWeight: bold),
+            // ),
+            // Text(
+            //   'Age :${user.age!} Years',
+            //   style: blackTextStyle.copyWith(fontSize: 20, fontWeight: bold),
+            // ),
             Text(
               'Test Result',
               style: blackTextStyle.copyWith(fontSize: 24, fontWeight: bold),

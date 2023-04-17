@@ -21,18 +21,6 @@ class AppTheme {
       ),
       elevation: 3,
     ),
-    listTileTheme: ListTileThemeData(
-      contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-      tileColor: lightColorScheme.surface,
-      textColor: lightColorScheme.onSurface,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: const BorderSide(
-          color: LightThemeColor.backgoundDark,
-          width: 2.0,
-        ),
-      ),
-    ),
     appBarTheme: AppBarTheme(
         backgroundColor: lightColorScheme.background,
         surfaceTintColor: lightColorScheme.tertiaryContainer,

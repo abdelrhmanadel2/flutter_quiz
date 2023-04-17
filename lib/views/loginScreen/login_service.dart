@@ -10,9 +10,9 @@ import 'package:get/get.dart';
 
 class LoginService {
   static ApiService api = ApiService();
-  static Future authenticate({username, password, onSuccess}) async {
+  static Future authenticate({email, password, onSuccess}) async {
     var user;
-    await api.normalRequest(Services.authenticate, "POST", data: {"userName": username, "password": password}, onSuccess: (data) async {
+    await api.normalRequest(Services.authenticate, "POST", data: {"email": email, "password": password}, onSuccess: (data) async {
       // Get.find<StorageService>().setToken(data);
       var res = ResponseModel.fromJson(data);
       user = AccountModel.fromJson(res.data);
@@ -33,7 +33,7 @@ class LoginService {
       user = AccountModel.fromJson(res.data);
 
       await Get.find<StorageService>().setAccountData(user);
-      if (onSuccess != null) onSuccess(res.data);
+      if (onSuccess != null) onSuccess(user);
     });
 
     return user;

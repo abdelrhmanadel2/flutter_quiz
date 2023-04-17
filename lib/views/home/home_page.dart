@@ -14,20 +14,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarWidget(
-        title: "Home Screen",
-        titleCenter: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  controller.logOut();
-                },
-                child: const Text("Sign Out")),
-          )
-        ],
-      ),
+      // appBar: AppBarWidget(
+      //   title: "",
+      //   titleCenter: true,
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: TextButton(
+      //           onPressed: () {
+      //             controller.logOut();
+      //           },
+      //           child: const Text("Sign Out")),
+      //     )
+      //   ],
+      // ),
       // backgroundColor: purpleColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -45,7 +45,9 @@ class HomePage extends StatelessWidget {
             FeatureTile(
               leadingIcon: Icons.history,
               title: "Quiz History",
-              navigation: () => Get.to(() => const QuizHistoryPage()),
+              navigation: () => Get.to(() => QuizHistoryPage(
+                    user: controller.kid!.sId!,
+                  )),
             ),
             const SizedBox(
               height: 20,

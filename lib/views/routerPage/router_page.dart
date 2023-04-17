@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/components/loading_request_widget.dart';
+import 'package:flutter_quiz/components/nav-forkids.dart';
+import 'package:flutter_quiz/components/nav.dart';
+import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:flutter_quiz/views/home/home_page.dart';
 import 'package:flutter_quiz/views/home/user_home_pinding.dart';
 import 'package:flutter_quiz/views/loginScreen/login_screen.dart';
 import 'package:flutter_quiz/views/loginScreen/login_service.dart';
+import 'package:flutter_quiz/views/welcomePage/welcome.dart';
 import 'package:get/get.dart';
 
 class RouterPage extends StatefulWidget {
@@ -20,7 +24,7 @@ class _RouterPageState extends State<RouterPage> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 3), () async {
+    Future.delayed(const Duration(milliseconds: 500), () async {
       chekIfLoggedIn();
     });
   }
@@ -44,16 +48,14 @@ class _RouterPageState extends State<RouterPage> {
   void chekIfLoggedIn() async {
     if (_storage.accountData?.sId != null) {
       await getUserAccess();
+    } else {
+      Get.off(() => const WelcomePage());
     }
-    //  Get.offAllNamed(AppData.adminWearhouseCenter);
-
-    else {
-      Get.off(() => const LoginScreen());
-    }
-    // Get.offAllNamed(AppData.signupFormScreen);
   }
 
   getUserAccess() async {
-    await LoginService.authenticateById(id: _storage.accountData?.sId, onSuccess: (data) async => {Get.off(() => HomePage())});
+    await LoginService.authenticateById(
+        id: _storage.accountData?.sId,
+        onSuccess: (AccountModel data) async => {(data.type == "parent") ? Get.off(() => NavParernt()) : Get.off(() => Navkid())});
   }
 }

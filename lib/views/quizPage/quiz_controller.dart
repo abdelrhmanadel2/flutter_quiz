@@ -3,6 +3,7 @@ import 'package:flutter_quiz/components/quiz_score.dart';
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/model/answer.dart';
 import 'package:flutter_quiz/model/iq_result.dart';
+import 'package:flutter_quiz/model/kid_model.dart';
 import 'package:flutter_quiz/model/quiz_model.dart';
 import 'package:flutter_quiz/model/quiz_question.dart';
 import 'package:flutter_quiz/utils/utils.dart';
@@ -11,40 +12,45 @@ import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:get/get.dart';
 
 class QuizController extends GetxController {
-  QuizController();
+  QuizController(this.kids);
   bool loading = true;
   late int currentIndex;
   late int currentLevel;
+  int mathCount = 0;
+  int logicCount = 0;
   int questionCount = 0;
   RxList<QuizQuestions> levelQuestions = List<QuizQuestions>.from([]).obs;
   final storage = Get.find<StorageService>();
+  late KidsModel kids;
   late AccountModel user;
   late QuizModel quiz;
   bool _answered = false;
   bool get answered => _answered;
 
   @override
-  void onInit() {
-    user = storage.accountData!;
+  void onInit() async {
     quiz = QuizModel();
-
-    if (Get.arguments != null) {
-      quiz = Get.arguments as QuizModel;
+    user = storage.accountData!;
+    await getCurrentQiz();
+    if (quiz.level != null) {
+      // quiz = Get.arguments as QuizModel;
       currentIndex = quiz.currentQuestion ?? 0;
       currentLevel = quiz.level ?? 1;
       levelQuestions = RxList<QuizQuestions>.from(quiz.questions ?? []);
       loading = false;
+      update();
     } else {
       currentIndex = 0;
       currentLevel = 1;
       levelQuestions = RxList<QuizQuestions>.from([]);
       getLevelQuestions();
       quiz = QuizModel(
+          kidId: kids.sId,
           questions: levelQuestions,
           currentQuestion: currentIndex,
           level: currentLevel,
-          result: IQResult(
-            accountId: user.sId,
+          totalResult: IQResult(
+            accountId: kids.sId,
             mathCount: 0,
             logicCount: 0,
             mentalAge: 0,
@@ -52,8 +58,10 @@ class QuizController extends GetxController {
             questionsCount: levelQuestions.length,
             iq: 0,
           ));
+      loading = false;
+      update();
     }
-    print('result: ${quiz.result?.toJson()}');
+    print('result: ${quiz.totalResult?.toJson()}');
     super.onInit();
   }
 
@@ -76,17 +84,17 @@ class QuizController extends GetxController {
     var precentage;
     if (currentLevel == 1) {
       precentage = 0.5;
-    } else if (quiz.result!.mathCount == quiz.result!.logicCount) {
+    } else if (quiz.totalResult!.mathCount == quiz.totalResult!.logicCount) {
       precentage = 0.6;
-    } else if (quiz.result!.mathCount! < quiz.result!.logicCount!) {
-      precentage = quiz.result!.logicCount! / quiz.result!.correctCount!;
-    } else if (quiz.result!.mathCount! > quiz.result!.logicCount!) {
-      precentage = quiz.result!.mathCount! / quiz.result!.correctCount!;
+    } else if (quiz.totalResult!.mathCount! < quiz.totalResult!.logicCount!) {
+      precentage = quiz.totalResult!.logicCount! / quiz.totalResult!.correctCount!;
+    } else if (quiz.totalResult!.mathCount! > quiz.totalResult!.logicCount!) {
+      precentage = quiz.totalResult!.mathCount! / quiz.totalResult!.correctCount!;
     }
     return precentage;
   }
 
-  Future getKidsLevelQuestions() async {
+  Future getBabyLevelQuestions() async {
     // levelQuestions.clear();
     loading = true;
     update();
@@ -95,15 +103,16 @@ class QuizController extends GetxController {
         : (currentLevel == 2)
             ? 15
             : 5;
-    await QuizService.getLevelQuestions(user.category!, currentLevel, questionCount, calculateprecentage(), onSuccess: (data) {
+    await QuizService.getLevelQuestions("baby", currentLevel, questionCount, calculateprecentage(), onSuccess: (data) {
       levelQuestions.addAll(data);
-      quiz.result?.questionsCount = levelQuestions.length;
+      levelQuestions.shuffle();
+      quiz.totalResult?.questionsCount = levelQuestions.length;
       loading = false;
       update();
     });
   }
 
-  Future getAdultLevelQuestions() async {
+  Future getYoungLevelQuestions() async {
     // levelQuestions.clear();
     loading = true;
     update();
@@ -112,9 +121,11 @@ class QuizController extends GetxController {
         : (currentLevel == 2)
             ? 15
             : 5;
-    await QuizService.getLevelQuestions(user.category!, currentLevel, questionCount, calculateprecentage(), onSuccess: (data) {
+    await QuizService.getLevelQuestions("young", currentLevel, questionCount, calculateprecentage(), onSuccess: (data) {
       levelQuestions.addAll(data);
-      quiz.result?.questionsCount = levelQuestions.length;
+      levelQuestions.shuffle();
+
+      quiz.totalResult?.questionsCount = levelQuestions.length;
 
       loading = false;
       update();
@@ -125,7 +136,7 @@ class QuizController extends GetxController {
     // levelQuestions.clear();
     loading = true;
 
-    await QuizService.createQuizResult(quiz.result!.toJson(), onSuccess: (data) {
+    await QuizService.createQuizResult(quiz.totalResult!.toJson(), onSuccess: (data) {
       storage.setQuizData(null);
       storage.quizData;
       Get.off(() => QuizScore(
@@ -137,21 +148,36 @@ class QuizController extends GetxController {
   }
 
   calculateResult() {
-    quiz.result?.iq = ((quiz.result!.correctCount! / quiz.result!.questionsCount!) * 160).truncateToDouble();
-    quiz.result?.mentalAge = ((quiz.result?.iq ?? 0) * user.age! / 100).truncateToDouble();
-    print((quiz.result!.correctCount! / quiz.result!.questionsCount!) * 160);
-    print(quiz.result?.iq);
+    quiz.totalResult?.iq = ((quiz.totalResult!.correctCount! / quiz.totalResult!.questionsCount!) * 160).truncateToDouble();
+    // quiz.totalResult?.mentalAge = ((quiz.totalResult?.iq ?? 0) * user.age! / 100).truncateToDouble();
+    print((quiz.totalResult!.correctCount! / quiz.totalResult!.questionsCount!) * 160);
+    print(quiz.totalResult?.iq);
   }
 
   saveResult() async {
-    await storage.setQuizData(quiz);
+    storage.setQuizData(quiz);
+
+    // await QuizService.addCurrentQuiz(quiz.toJson(), onSuccess: (data) {
+    //   // if (data != null) quiz = data;
+    // });
+  }
+
+  getCurrentQiz() async {
+    if (user.type == "kids") {
+      quiz = storage.quizData ?? QuizModel();
+    }
+
+    // await QuizService.getCurrentQuiz(kids.sId, onSuccess: (data) {
+    //   if (data != null) quiz = data;
+    //   // print("Data ${data.toJson()}");
+    // });
   }
 
   Future getLevelQuestions() async {
-    if (user.category == "kids") {
-      await getKidsLevelQuestions();
+    if (kids.category == "baby") {
+      await getBabyLevelQuestions();
     } else {
-      await getAdultLevelQuestions();
+      await getYoungLevelQuestions();
     }
   }
 
@@ -173,9 +199,15 @@ class QuizController extends GetxController {
     }
   }
 
+  deleteCurrentQuiz() {
+    QuizService.deleteCurrentQuiz(kids.sId);
+  }
+
   handedlLevels() async {
     if (currentLevel == 3) {
       // calculateResult();
+      // deleteCurrentQuiz();
+
       createQuizResult();
       // save
     } else {
@@ -191,16 +223,16 @@ class QuizController extends GetxController {
     _answered = true;
     // quiz.currentQuestion = currentIndex;
     quiz.level = currentLevel;
-    print("tage: ${question.tag} mathCount :${quiz.result!.mathCount} logicCount :${quiz.result!.logicCount}");
+    print("tage: ${question.tag} mathCount :${quiz.totalResult!.mathCount} logicCount :${quiz.totalResult!.logicCount}");
     // quiz.result!.correctCount = quiz.result!.correctCount! + 1;
 
     // if (question.tag == "Math") quiz.result!.mathCount = quiz.result!.mathCount! + 1;
 
     if (selectedAnswer.isAnswer!) {
-      quiz.result!.correctCount = quiz.result!.correctCount! + 1;
+      quiz.totalResult!.correctCount = quiz.totalResult!.correctCount! + 1;
 
-      if (question.tag == "Math") quiz.result!.mathCount = quiz.result!.mathCount! + 1;
-      if (question.tag == "Logic") quiz.result!.logicCount = quiz.result!.logicCount! + 1;
+      if (question.tag == "Math") quiz.totalResult!.mathCount = quiz.totalResult!.mathCount! + 1;
+      if (question.tag == "Logic") quiz.totalResult!.logicCount = quiz.totalResult!.logicCount! + 1;
       showSnack(massage: "Correct Answer");
     } else {
       showSnack(massage: "Wrong Answer");

@@ -73,7 +73,7 @@ class StorageService extends GetxService {
     print('StorageService.accountData user= $user');
     if (user != null) {
       print('StorageService.setAccountData user != null');
-      log('StorageService.setAccountData userid= ${user.name}');
+      log('StorageService.setAccountData userid= ${user.email}');
       await _prefs.write(StorageKeys.accountData, user.toJson());
     } else {
       print('StorageService.setUserData user is null');

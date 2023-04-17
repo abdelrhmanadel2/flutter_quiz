@@ -34,7 +34,7 @@ class LoginController extends GetxController {
 
   final formKey = GlobalKey<FormState>();
   late TextEditingController passwordController;
-  late TextEditingController nameController;
+  late TextEditingController emailController;
   bool passValidated = false;
   bool emailValidated = false;
   bool formValidated = false;
@@ -47,12 +47,12 @@ class LoginController extends GetxController {
   void onInit() {
     super.onInit();
     passwordController = TextEditingController();
-    nameController = TextEditingController();
+    emailController = TextEditingController();
   }
 
   @override
   void onClose() {
-    nameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.onClose();
   }
@@ -60,13 +60,13 @@ class LoginController extends GetxController {
   void clear() {
     passwordController.clear();
     // phoneController.clear();
-    nameController.clear();
+    emailController.clear();
   }
 
   Future<void> sendInquiry() async {
     try {
       await LoginService.authenticate(
-          username: nameController.text,
+          email: emailController.text,
           password: passwordController.text,
           onSuccess: (data) async => {
                 Get.off(() => HomePage()),
@@ -141,6 +141,6 @@ class LoginController extends GetxController {
 
   @override
   String toString() {
-    return 'LoginController{ _email: ${nameController.value}, _password: ${passwordController.value}}';
+    return 'LoginController{ _email: ${emailController.value}, _password: ${passwordController.value}}';
   }
 }

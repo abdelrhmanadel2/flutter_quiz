@@ -52,7 +52,7 @@ class CustomInputfield extends StatefulWidget {
 class _CustomInputfieldState extends State<CustomInputfield> {
   var arabic = RegExp(r'^[\u0621-\u064A\u0660-\u0669 ]+');
 
-  var textDirection;
+  var textDirection = TextDirection.rtl;
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +67,8 @@ class _CustomInputfieldState extends State<CustomInputfield> {
         //   child:
 
         TextFormField(
+      // enableInteractiveSelection: true,
+      // selectionControls: MaterialTextSelectionControls(),
       maxLengthEnforcement: MaxLengthEnforcement.none,
       obscureText: widget.obsecure, onTap: widget.onTap,
       maxLines: widget.maxLines ?? 1,
@@ -74,31 +76,39 @@ class _CustomInputfieldState extends State<CustomInputfield> {
       decoration: InputDecoration(
         fillColor: widget.filledColor ?? theme.canvasColor,
         filled: widget.filled,
-        labelText: widget.labelText,
+        // labelText: widget.labelText,
+        label: Text(
+          widget.labelText ?? "",
+          // style: TextStyle(fontSize: 20),
+        ),
         hintText: widget.hintText,
         contentPadding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-        labelStyle: theme.textTheme.bodyText1!.apply(color: theme.hintColor),
-        floatingLabelStyle: theme.textTheme.bodyText1!.apply(color: theme.disabledColor),
+        labelStyle: TextStyle(color: theme.hintColor),
+        floatingLabelStyle: TextStyle(
+          fontSize: 30,
+          color: theme.disabledColor,
+        ),
         suffixIcon: (widget.suffixIcon != null)
             ? Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                 widget.suffixIcon,
               ])
             : null,
-        floatingLabelBehavior: widget.floatingLabelBehavior ?? FloatingLabelBehavior.never,
+        floatingLabelBehavior: widget.floatingLabelBehavior ?? FloatingLabelBehavior.auto,
       ),
       keyboardType: widget.keyboardType,
       onChanged: (value) {
         print("arabic.hasMatch(controller?.text ?? " ")${arabic.hasMatch(widget.controller?.text ?? "")}");
-        if (arabic.hasMatch(widget.controller?.text ?? "")) {
+        if (arabic.hasMatch(widget.controller?.text ?? "") && textDirection != TextDirection.rtl) {
           setState(() {
             textDirection = TextDirection.rtl;
+            widget.controller?.selection = TextSelection.fromPosition(TextPosition(offset: widget.controller?.text.length ?? 0));
           });
-        } else {
+        } else if (!arabic.hasMatch(widget.controller?.text ?? "") && textDirection != TextDirection.ltr) {
           setState(() {
             textDirection = TextDirection.ltr;
+            widget.controller?.selection = TextSelection.fromPosition(TextPosition(offset: widget.controller?.text.length ?? 0));
           });
         }
-        widget.controller?.selection = TextSelection.fromPosition(TextPosition(offset: widget.controller?.text.length ?? 0));
 
         if (widget.onchange != null) widget.onchange(value);
       },

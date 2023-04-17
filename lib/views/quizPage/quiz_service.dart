@@ -1,4 +1,5 @@
 import 'package:flutter_quiz/model/iq_result.dart';
+import 'package:flutter_quiz/model/quiz_model.dart';
 import 'package:flutter_quiz/model/quiz_question.dart';
 import 'package:flutter_quiz/model/response_model.dart';
 import 'package:flutter_quiz/services/api_service.dart';
@@ -66,6 +67,63 @@ class QuizService {
         var res = ResponseModel.fromJson(data);
 
         result = IQResult.fromJson(res.data);
+
+        if (onSuccess != null) onSuccess(result);
+      },
+    );
+    print("result $result");
+    return result;
+  }
+
+  static Future<QuizModel?> addCurrentQuiz(data, {onSuccess}) async {
+    QuizModel? result;
+
+    await api.normalRequest(
+      Services.addCurrentQuiz,
+      "POST",
+      data: data,
+      onSuccess: (data) async {
+        var res = ResponseModel.fromJson(data);
+
+        result = (res.data != null) ? QuizModel.fromJson(res.data) : null;
+
+        if (onSuccess != null) onSuccess(result);
+      },
+    );
+    print("result $result");
+    return result;
+  }
+
+  static Future<QuizModel?> getCurrentQuiz(id, {onSuccess}) async {
+    QuizModel? result;
+
+    await api.normalRequest(
+      Services.getCurrentQuiz,
+      "GET",
+      queryParamters: {"id": id},
+      onSuccess: (data) async {
+        var res = ResponseModel.fromJson(data);
+
+        result = (res.data != null) ? QuizModel.fromJson(res.data) : null;
+
+        if (onSuccess != null) onSuccess(result);
+      },
+    );
+    print("result $result");
+    return result;
+  }
+
+  static Future<QuizModel?> deleteCurrentQuiz(id, {onSuccess}) async {
+    QuizModel? result;
+
+    await api.normalRequest(
+      Services.deleteCurrentQuiz,
+      "GET",
+      queryParamters: {"id": id},
+      onSuccess: (data) async {
+        // var res = ResponseModel.fromJson(data);
+
+        // result = (res.data != null) ? QuizModel.fromJson(res.data) : null;
 
         if (onSuccess != null) onSuccess(result);
       },

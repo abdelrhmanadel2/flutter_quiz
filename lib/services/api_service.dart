@@ -18,7 +18,7 @@ class ApiService extends GetxService {
 
   void init() {
     // dio.options.baseUrl = "https://seal-app-njkkz.ondigitalocean.app/api/v1/";
-    dio.options.baseUrl = "http://192.168.1.7:4800/";
+    dio.options.baseUrl = "http://192.168.1.7:3801/";
     dio.options.connectTimeout = Duration(milliseconds: 5000);
     dio.options.receiveTimeout = Duration(milliseconds: 200000);
     dio.interceptors.add(PrettyDioLogger(

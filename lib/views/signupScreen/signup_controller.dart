@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/components/nav-forkids.dart';
+import 'package:flutter_quiz/components/nav.dart';
+import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:flutter_quiz/utils/validation_helper.dart';
 import 'package:flutter_quiz/views/home/home_page.dart';
@@ -13,19 +16,6 @@ class SignupController extends GetxController {
 
   RxBool _visiblePsd = false.obs;
 
-  //fixme make it false
-
-  RxBool _isEnableSignup = false.obs;
-
-  RxBool _isAcceptTerms = false.obs;
-
-  bool get isAcceptTerms => _isAcceptTerms.value;
-
-  void toggleCheckbox() {
-    _isAcceptTerms.value = !_isAcceptTerms.value;
-  }
-
-  bool get isEnableSignup => _isEnableSignup.value;
   bool get visiblePsd => _visiblePsd.value;
 
   void toggleVisiblePsd() {
@@ -33,31 +23,23 @@ class SignupController extends GetxController {
     update();
   }
 
-  set isEnableSignup(bool value) {
-    _isEnableSignup.value = value;
-    print('SignupController.isEnableSignup value= $value');
-    update();
-  }
-
+  String kind = "parent";
   final formKey = GlobalKey<FormState>();
-  late TextEditingController nameController;
-  late TextEditingController userNameController;
-  late TextEditingController passwordController;
-  late TextEditingController ageController;
-  bool hrCodeValidated = false;
-  bool passValidated = false;
-  bool emailValidated = false;
-  bool formValidated = false;
-  bool hrCodeState = false;
-  bool passState = false;
-  bool emailState = false;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
   // InqueryModel? _inqueryModel;
   @override
   void onInit() {
     super.onInit();
     nameController = TextEditingController();
+    confirmPasswordController = TextEditingController();
     userNameController = TextEditingController();
+    emailController = TextEditingController();
     passwordController = TextEditingController();
     ageController = TextEditingController();
   }
@@ -70,64 +52,77 @@ class SignupController extends GetxController {
     super.onClose();
   }
 
-  void clear() {
-    passwordController.clear();
-    // phoneController.clear();
-    nameController.clear();
-    ageController.clear();
+  String? validateName(String? name) {
+    return validatorHelber.validateName(name);
   }
 
-  String? validateName(String? name) {
-    var validateName = validatorHelber.validateName(name);
-    if (validateName == null && name != "") {
-      hrCodeState = true;
-      hrCodeValidated = true;
-    } else {
-      hrCodeValidated = true;
-      hrCodeState = false;
+  String? validateKidAge(String? name) {
+    double value = double.tryParse(name ?? "") ?? 0;
+    print("isNumberValid ${!validatorHelber.isNumberNotValid(name ?? "--")}");
+    if ((validatorHelber.isNumberNotValid(name ?? "--")) || (value < 10 || value > 16)) {
+      return "Age Must Be between 10 and 16";
     }
-    return validateName;
+    return null;
+  }
+
+  String? validateBabyAge(String? name) {
+    double value = double.tryParse(name ?? "") ?? 0;
+    print("isNumberValid ${!validatorHelber.isNumberNotValid(name ?? "--")}");
+    if ((validatorHelber.isNumberNotValid(name ?? "--")) || (value < 10 || value > 16)) {
+      return "Age Must Be between 10 and 16";
+    }
+  }
+
+  String? validateEmail(String? email) {
+    return validatorHelber.validateEmail(email);
   }
 
   String? validatePassword(String? password) {
-    final validatePassword = validatorHelber.validateName(password);
-    if (validatePassword == null) {
-      passState = true;
-    }
-    passValidated = true;
-    return validatePassword;
+    return validatorHelber.validatePassword(password);
   }
 
-  Future<void> sendInquiry() async {
-    try {
-      print(toString());
+  String? validateConfirmPassword(String? password) {
+    return validatorHelber.validateConfirmPassword(passwordController.text, password);
+  }
 
-      await SignupService.register(
-          name: nameController.text,
-          userName: userNameController.text,
-          age: int.parse(ageController.text),
-          password: passwordController.text,
-          onSuccess: (response) {
-            Get.find<StorageService>().setAccountData(response);
-            Get.off(() => HomePage());
-          });
-    } catch (e) {}
+  onKindChange(value) {
+    kind = value;
+    update();
+  }
+
+  signupKid() async {
+    await SignupService.registerKid(
+        name: nameController.text,
+        email: emailController.text,
+        age: int.parse(ageController.text),
+        password: passwordController.text,
+        onSuccess: (AccountModel response) {
+          Get.find<StorageService>().setAccountData(response);
+          (response.type == "parent") ? Get.off(() => NavParernt()) : Get.off(() => Navkid());
+        });
+  }
+
+  signupParent() async {
+    await SignupService.registerParent(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        onSuccess: (response) {
+          Get.find<StorageService>().setAccountData(response);
+          Get.off(() => HomePage());
+        });
   }
 
   Future<void> sendPressed() async {
-    formValidated = formKey.currentState!.validate();
+    var formValidated = formKey.currentState!.validate();
 
     if (formValidated) {
       formKey.currentState?.save();
-      await sendInquiry();
+      (kind == "parent") ? signupParent() : signupKid();
     }
   }
 
   Future errorDialog(String err) async {
     return Get.defaultDialog(title: "error /n Pleas Try Agian", titlePadding: EdgeInsets.symmetric(vertical: 10), middleText: err);
-  }
-
-  String toString() {
-    return 'SignupController{ _firstName: ${nameController.text},_email: ${ageController.text}, _password: ${passwordController.text}}';
   }
 }
