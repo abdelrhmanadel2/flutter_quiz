@@ -1,11 +1,12 @@
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/model/kid_model.dart';
 import 'package:flutter_quiz/model/quiz_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
-import 'package:flutter_quiz/views/addKids/kids_service.dart';
-import 'package:flutter_quiz/views/loginScreen/login_screen.dart';
-import 'package:flutter_quiz/views/quizPage/quiz_page.dart';
-import 'package:get/get.dart';
+import '../addKids/kids_service.dart';
+import '../loginScreen/login_screen.dart';
+import '../quizPage/quiz_page.dart';
 
 class HomeController extends GetxController {
   final storage = Get.find<StorageService>();

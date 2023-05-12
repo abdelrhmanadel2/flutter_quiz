@@ -10,9 +10,9 @@ class ValidatorHelper {
   String? validateKidsAge(String? number) {
     // print("isNumberNotValid(number!)${isNumberNotValid(number!)}");
     if (number == null || number.isEmpty) {
-      return "Required Field";
+      return "الرجاء ادخال عمر الطفل";
     } else if (number.isNotEmpty && isNumberNotValid(number) || double.tryParse(number)! < 11) {
-      return "Age Must Be > 11";
+      return "العمر يجب أن يكون أصغر من 11 سنة ";
     }
     return null;
   }
@@ -20,18 +20,18 @@ class ValidatorHelper {
   String? validateyYoungKidsAge(String? number) {
     // print("isNumberNotValid(number!)${isNumberNotValid(number!)}");
     if (number == null || number.isEmpty) {
-      return "Required Field";
+      return "الحقل مطلوب";
     } else if (number.isNotEmpty && isNumberNotValid(number) || double.tryParse(number)! < 6) {
-      return "Age Must Be > 6";
+      return "العمر يجب أن يكون أكبر من 6 سنوات ";
     }
     return null;
   }
 
   String? validateName(String? text) {
     if (text == null || text.isEmpty) {
-      return "Required Field";
+      return "الرجاء ادخال اسم";
     } else if (isNotValidName(text)) {
-      return "Name must be longer than 3 letter";
+      return "الاسم يجب أن يكون اكثر من 3 أحرف ";
     } else {
       return null;
     }
@@ -39,7 +39,7 @@ class ValidatorHelper {
 
   String? validateEmptyField(String? text) {
     if (text == null || text.isEmpty) {
-      return "Required Field";
+      return "الحقل مطلوب ";
     } else {
       return null;
     }
@@ -47,15 +47,22 @@ class ValidatorHelper {
 
   String? validatePassword(String? password) {
     if (password == null || isPasswordNotValid(password)) {
-      return "Invalid Password";
-    }
+
+      return 'كلمة مرور غير مقبولة , يجب أن تحتوي كلمة المرور على  :'
+
+          '\n - 8 أحرف على الأقل'
+          '\n  - حرف واحد كبير على الأقل  '
+          '\n - رقم واحد على الأقل'
+          '\n   رمز واحد على الأقل (? # @ & % ! *) '
+
+      ;    }
 
     return null;
   }
 
   String? validateEmail(String? email) {
     if (email == null || isEmailNotValid(email)) {
-      return "Invalid Email";
+      return 'الرجاء ادخال صيغة بريد إلكتروني صحيحة ';
     }
 
     return null;
@@ -63,7 +70,7 @@ class ValidatorHelper {
 
   String? validateConfirmPassword(String? password, String? confirmPassword) {
     if (confirmPassword == null || confirmPassword != password || isPasswordNotValid(password ?? " ")) {
-      return "Password And Confirm Password Don't Mach";
+      return "كلمة المرور غير متطابقة ";
     }
 
     return null;
@@ -74,7 +81,7 @@ class ValidatorHelper {
   }
 
   bool isPasswordNotValid(String password) {
-    return !RegExp(r'^\S{8,}$').hasMatch(password);
+    return !RegExp(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$').hasMatch(password);
   }
 
   bool isNumberNotValid(String number) {
@@ -98,7 +105,9 @@ class ValidatorHelper {
   }
 
   bool isEmailNotValid(String email) {
-    return !RegExp(r"^[\w-\.]{5,}@([\w-]{2,}\.)+[\w-]{2,4}$").hasMatch(email);
+    return !RegExp (r'^[a-zA-Z0-9._%+-]+@(gmail|hotmail|outlook|icloud|kku)\.(com|edu\.sa)$').hasMatch(email);
+
+    // return !RegExp(r"^[\w-\.]{5,}@([\w-]{2,}\.)+[\w-]{2,4}$").hasMatch(email);
     // return !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]{3,50}@[a-zA-Z0-9]{3,30}\.[a-zA-Z]{2, 5 }").hasMatch(email);
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/components/loading_request_widget.dart';
 import 'package:get/get.dart';
 import 'package:quickalert/quickalert.dart';
+
+import '../components/loading_request_widget.dart';
 
 spacer(double height) {
   return SizedBox(

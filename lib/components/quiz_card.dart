@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/components/optional.dart';
-import 'package:flutter_quiz/model/quiz_question.dart';
+
 
 import 'package:get/get.dart';
+
+import '../model/quiz_question.dart';
+import 'optional.dart';
 
 class QuestionCard extends StatefulWidget {
   final Function correctAns;
@@ -39,7 +41,7 @@ class _QuestionCardState extends State<QuestionCard> {
           children: [
             CachedNetworkImage(
               height: 140,
-              // width: 200,
+              width: 300,
               fit: BoxFit.contain,
               imageUrl: widget.question.questionImg ?? "",
               progressIndicatorBuilder: (context, url, downloadProgress) =>

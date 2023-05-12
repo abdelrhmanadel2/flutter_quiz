@@ -1,8 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/components/clip.dart';
 import 'package:get/get.dart';
+
+import 'clip.dart';
 
 class Background extends StatelessWidget {
   final Widget child;

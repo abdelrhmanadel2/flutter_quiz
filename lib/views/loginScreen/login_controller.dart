@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/model/account_model.dart';
-import 'package:flutter_quiz/views/home/home_page.dart';
+import 'package:get/get.dart';
+import 'package:flutter_quiz/components/nav-forkids.dart';
+import 'package:flutter_quiz/components/nav.dart';
+import 'package:flutter_quiz/components/navAdmin.dart';
+
 import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:flutter_quiz/utils/validation_helper.dart';
-import 'package:flutter_quiz/views/home/user_home_pinding.dart';
-import 'package:flutter_quiz/views/loginScreen/login_service.dart';
-import 'package:get/get.dart';
+import '../home/home_page.dart';
+import 'login_service.dart';
 
 const wrongCode = 'assets/images/wrong_code.png';
 
@@ -68,13 +70,19 @@ class LoginController extends GetxController {
       await LoginService.authenticate(
           email: emailController.text,
           password: passwordController.text,
-          onSuccess: (data) async => {
-                Get.off(() => HomePage()),
-                // response = AccountModel.fromJson(data),
-                Get.find<StorageService>().setAccountData(data)
-                // Subscrip(),
-                // Get.offAllNamed(AppData.initialRoute),
-              });
+          onSuccess: (data) async {
+            if (data.type == "admin")
+              Get.off(() => NavAdmin());
+            else if (data.type == "parent") {
+              Get.off(() => NavParernt());
+            } else if (data.type == "kids") {
+              Get.off(() => Navkid());
+            }
+
+            Get.find<StorageService>().setAccountData(data);
+            // Subscrip(),
+            // Get.offAllNamed(AppData.initialRoute),
+          });
     } catch (e) {}
 
     // late String successMessage;

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/model/kid_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:flutter_quiz/utils/utils.dart';
 import 'package:flutter_quiz/utils/validation_helper.dart';
-import 'package:flutter_quiz/views/addKids/kids_service.dart';
-import 'package:flutter_quiz/views/signupScreen/signup_screen.dart';
-import 'package:get/get.dart';
-
-import 'package:get/get.dart';
+import 'kids_service.dart';
 
 class KidsListController extends GetxController {
   KidsListController();
@@ -34,8 +35,8 @@ class KidsListController extends GetxController {
   String? validateAge(String? name) {
     double value = double.tryParse(name ?? "") ?? 0;
     print("isNumberValid ${!validatorHelber.isNumberNotValid(name ?? "--")}");
-    if ((validatorHelber.isNumberNotValid(name ?? "--")) || (value < 6 || value > 16)) {
-      return "Age Must Be between 6 and 16";
+    if ((validatorHelber.isNumberNotValid(name ?? "--")) || (value < 6 || value > 10)) {
+      return "Age Must Be between 6 and 10";
     }
   }
 

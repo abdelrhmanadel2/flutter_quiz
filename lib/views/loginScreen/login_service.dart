@@ -1,12 +1,12 @@
-// ignore: avoid_classes_with_only_static_members
+import 'package:get/get.dart';
+import 'package:flutter_quiz/views/routerPage/router_page.dart';
+
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/model/response_model.dart';
 import 'package:flutter_quiz/services/api_service.dart';
 import 'package:flutter_quiz/services/services.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:flutter_quiz/utils/utils.dart';
-import 'package:flutter_quiz/views/home/home_page.dart';
-import 'package:get/get.dart';
 
 class LoginService {
   static ApiService api = ApiService();
@@ -33,7 +33,10 @@ class LoginService {
       user = AccountModel.fromJson(res.data);
 
       await Get.find<StorageService>().setAccountData(user);
-      if (onSuccess != null) onSuccess(user);
+      if (user == null) {
+        await Get.find<StorageService>().setAccountData(null);
+        Get.off(() => RouterPage());
+      } else if (onSuccess != null) onSuccess(user);
     });
 
     return user;

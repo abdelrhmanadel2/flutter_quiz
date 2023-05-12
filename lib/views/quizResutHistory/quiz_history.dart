@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+import 'package:flutter_quiz/views/quizResutHistory/quiz_history_controller.dart';
+
 import 'package:flutter_quiz/components/app_bar.dart';
 import 'package:flutter_quiz/components/quiz_score.dart';
 import 'package:flutter_quiz/components/rich_text_widget.dart';
-import 'package:flutter_quiz/views/quizResutHistory/quiz_history_controller.dart';
-import 'package:get/get.dart';
 
 class QuizHistoryPage extends StatelessWidget {
   final String user;
@@ -36,11 +38,11 @@ class QuizHistoryPage extends StatelessWidget {
                                     contentPadding: EdgeInsets.all(10),
                                     onTap: () => Get.to(QuizScore(result: item)),
                                     title: Column(children: [
-                                      RitchTextWidget(title: "IQ Score", text: item.iq.toString()),
-                                      RitchTextWidget(title: "Mental Age", text: item.mentalAge?.toString() ?? "Na"),
-                                      RitchTextWidget(title: "Correct Answers", text: "${item.correctCount.toString()}/${item.questionsCount}"),
-                                      RitchTextWidget(title: "Logic", text: item.logicCount.toString()),
-                                      RitchTextWidget(title: "Math", text: item.mathCount.toString()),
+                                      RitchTextWidget(title: "درجة الذكاء", text: item.iq.toString()),
+                                      RitchTextWidget(title: "العمر العقلي", text: item.mentalAge?.toString() ?? "Na"),
+                                      RitchTextWidget(title: "الاجابات الصحيحة ", text: "${item.correctCount.toString()}/${item.questionsCount}"),
+                                      RitchTextWidget(title: "اسئلة المنطق ", text: item.logicAnswered.toString()),
+                                      RitchTextWidget(title: "اسئلة الرياضيات", text: item.mathAnswered.toString()),
                                     ]),
                                   ),
                                 );
@@ -48,7 +50,7 @@ class QuizHistoryPage extends StatelessWidget {
                           : (controller.isLoading.isTrue)
                               ? const Center(child: CircularProgressIndicator())
                               : const Center(
-                                  child: Text("No Results Found"),
+                                  child: Text("لا توجد نتائج "),
                                 ))),
                 ],
               ),

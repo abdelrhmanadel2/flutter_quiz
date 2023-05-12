@@ -1,6 +1,8 @@
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter_quiz/model/answer.dart';
+
 import 'package:get/get.dart';
+
+import '../model/answer.dart';
 
 class CloudeStorageService extends GetxService {
   Future<List<AnswerModel>> geturlsFromDirectory(String path) async {

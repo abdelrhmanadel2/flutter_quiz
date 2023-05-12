@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/views/loginScreen/login_screen.dart';
-import 'package:flutter_quiz/views/signupScreen/signup_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_quiz/views/testQuizPage/rest-quiz_page.dart';
+
+import '../loginScreen/login_screen.dart';
+import '../signupScreen/signup_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key, this.title}) : super(key: key);
@@ -55,68 +57,51 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 
-  // Widget _label() {
-  //   return Container(
-  //       margin: EdgeInsets.only(top: 40, bottom: 20),
-  //       child: Column(
-  //         children: <Widget>[
-  //           Text(
-  //             'Quick login with Touch ID',
-  //             style: TextStyle(color: Colors.white, fontSize: 17),
-  //           ),
-  //           SizedBox(
-  //             height: 20,
-  //           ),
-  //           Icon(Icons.fingerprint, size: 90, color: Colors.white),
-  //           SizedBox(
-  //             height: 20,
-  //           ),
-  //           Text(
-  //             'Touch ID',
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 15,
-  //               decoration: TextDecoration.underline,
-  //             ),
-  //           ),
-  //         ],
-  //       ));
-  // }
-  // Widget _label() {
-  //   return InkWell(
-  //     onTap: () {
-  //       Navigator.push(context, MaterialPageRoute(builder: (context) => hj()));
-  //     },
-  //     child: Container(
-  //       width: MediaQuery.of(context).size.width,
-  //       decoration: new BoxDecoration(
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.orange,
-  //             blurRadius: 10.0,
-  //           ),
-  //         ],
-  //       ),
-  //       child: Card(
-  //         color: Colors.white,
-  //         shape: RoundedRectangleBorder(
-  //           side: BorderSide(color: Colors.orange, width: 1),
-  //           borderRadius: BorderRadius.circular(20.0),
-  //         ),
-  //         child: SizedBox(
-  //           width: 30,
-  //           height: 50,
-  //           child: Center(
-  //             child: Text('اختبار تجريبي ',
-  //                 style: GoogleFonts.almarai(
-  //                   textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.orange),
-  //                 )),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget label() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => TestQuizPage()));
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: new BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.orange,
+              blurRadius: 10.0,
+            ),
+          ],
+        ),
+        child: Card(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.orange, width: 1),
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          child: SizedBox(
+            width: 30,
+            height: 50,
+            child: Center(
+              child: Text('اختبار تجريبي ',
+                  style: GoogleFonts.almarai(
+                    textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.orange),
+                  )),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget img() {
+    return Column(
+      children: [
+        Image.asset('assets/zak.png'),
+        // set the size of the icon
+        // set the color of the icon
+      ],
+    );
+  }
 
   Widget _title() {
     return RichText(
@@ -157,6 +142,7 @@ class _WelcomePageState extends State<WelcomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              img(),
               _title(),
               SizedBox(
                 height: 80,
@@ -169,6 +155,7 @@ class _WelcomePageState extends State<WelcomePage> {
               SizedBox(
                 height: 20,
               ),
+              label(),
               // _label()
             ],
           ),
@@ -177,3 +164,67 @@ class _WelcomePageState extends State<WelcomePage> {
     );
   }
 }
+
+
+// Widget _label() {
+//   return Container(
+//       margin: EdgeInsets.only(top: 40, bottom: 20),
+//       child: Column(
+//         children: <Widget>[
+//           Text(
+//             'Quick login with Touch ID',
+//             style: TextStyle(color: Colors.white, fontSize: 17),
+//           ),
+//           SizedBox(
+//             height: 20,
+//           ),
+//           Icon(Icons.fingerprint, size: 90, color: Colors.white),
+//           SizedBox(
+//             height: 20,
+//           ),
+//           Text(
+//             'Touch ID',
+//             style: TextStyle(
+//               color: Colors.white,
+//               fontSize: 15,
+//               decoration: TextDecoration.underline,
+//             ),
+//           ),
+//         ],
+//       ));
+// }
+// Widget _label() {
+//   return InkWell(
+//     onTap: () {
+//       Navigator.push(context, MaterialPageRoute(builder: (context) => hj()));
+//     },
+//     child: Container(
+//       width: MediaQuery.of(context).size.width,
+//       decoration: new BoxDecoration(
+//         boxShadow: [
+//           BoxShadow(
+//             color: Colors.orange,
+//             blurRadius: 10.0,
+//           ),
+//         ],
+//       ),
+//       child: Card(
+//         color: Colors.white,
+//         shape: RoundedRectangleBorder(
+//           side: BorderSide(color: Colors.orange, width: 1),
+//           borderRadius: BorderRadius.circular(20.0),
+//         ),
+//         child: SizedBox(
+//           width: 30,
+//           height: 50,
+//           child: Center(
+//             child: Text('اختبار تجريبي ',
+//                 style: GoogleFonts.almarai(
+//                   textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 25, color: Colors.orange),
+//                 )),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
+// }

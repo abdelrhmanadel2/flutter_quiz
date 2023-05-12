@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/views/welcomePage/be.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class train extends StatefulWidget {
   const train({Key? key}) : super(key: key);
@@ -9,31 +11,14 @@ class train extends StatefulWidget {
 }
 
 class _trainState extends State<train> {
-  final Uri url = Uri.parse("https://6manina.com/");
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
-            ),
-            Text("تراجع", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500))
-          ],
-        ),
-      ),
-    );
-  }
+  final Uri url = Uri.parse("https://motamn.com/ar");
+  final Uri url2 = Uri.parse("https://altawsul.com/");
+  final Uri url3 = Uri.parse("https://motmaina.com/service/2");
 
   Widget ceter() {
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.only(right: 5, left: 70, top: 50, bottom: 50),
+        padding: const EdgeInsets.only(right: 5, left: 70, bottom: 10),
         child: Container(
           child: Padding(
             padding: const EdgeInsets.only(right: 70),
@@ -59,7 +44,7 @@ class _trainState extends State<train> {
                       color: Colors.lime[700],
                     )),
                 Padding(
-                  padding: const EdgeInsets.only(right: 5, left: 10, top: 20, bottom: 50),
+                  padding: const EdgeInsets.only(right: 5, left: 10, top: 20, bottom: 10),
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(
@@ -75,7 +60,7 @@ class _trainState extends State<train> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                            padding: const EdgeInsets.all(15),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Icon(
                               Icons.child_care_outlined,
                               color: Colors.pink[200],
@@ -86,158 +71,131 @@ class _trainState extends State<train> {
                           height: 5,
                           width: 300,
                         ),
-                        Text("عيادات طمأنينة",
+                        Text("مركز مؤتمن",
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Colors.pink[200],
+                              color: Colors.green,
                             )),
                         ElevatedButton(
-                          onPressed: () {
-                            // launchUrl(url);
-                          },
-                          child: Text('انقر للتسجيل'),
-                          style: TextButton.styleFrom(backgroundColor: Colors.pink[200], shape: StadiumBorder()),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 5, left: 10, top: 20, bottom: 50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.pink,
-                          width: 2,
-                        ),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(offset: const Offset(0, 5), color: Theme.of(context).primaryColor.withOpacity(.2), spreadRadius: 2, blurRadius: 5)
-                        ]),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Icon(
-                              Icons.child_care_outlined,
-                              color: Colors.pink[200],
-                            )
-                            //Icon( CupertinoIcons.card, color: Colors.lime,size: 100,),
-                            ),
-                        const SizedBox(
-                          height: 5,
-                          width: 300,
-                        ),
-                        Text("عيادات طمأنينة",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.pink[200],
-                            )),
-                        ElevatedButton(
-                          onPressed: () {
-                            // launchUrl(url);
-                          },
-                          child: Text('انقر للتسجيل'),
-                          style: TextButton.styleFrom(backgroundColor: Colors.pink[200], shape: StadiumBorder()),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 5, left: 10, top: 20, bottom: 50),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.pink,
-                          width: 2,
-                        ),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(offset: const Offset(0, 5), color: Theme.of(context).primaryColor.withOpacity(.2), spreadRadius: 2, blurRadius: 5)
-                        ]),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Icon(
-                              Icons.child_care_outlined,
-                              color: Colors.pink[200],
-                            )
-                            //Icon( CupertinoIcons.card, color: Colors.lime,size: 100,),
-                            ),
-                        const SizedBox(
-                          height: 5,
-                          width: 300,
-                        ),
-                        Text("عيادات طمأنينة",
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.pink[200],
-                            )),
-                        ElevatedButton(
-                          onPressed: () {
-                            // launchUrl(url);
-                          },
-                          child: Text('انقر للتسجيل'),
-                          style: TextButton.styleFrom(backgroundColor: Colors.pink[200], shape: StadiumBorder()),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(right: 5, left: 10, top: 20, bottom: 50),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.orange,
-                            width: 2,
-                          ),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                offset: const Offset(0, 5), color: Theme.of(context).primaryColor.withOpacity(.2), spreadRadius: 2, blurRadius: 5)
-                          ]),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Icon(
-                                Icons.child_care_outlined,
-                                color: Colors.orange[200],
-                              )
-                              //Icon( CupertinoIcons.card, color: Colors.lime,size: 100,),
-                              ),
-                          const SizedBox(
-                            height: 5,
-                            width: 300,
-                          ),
-                          Text("عيادات طمأنينة",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.orange[200],
-                              )),
-                          ElevatedButton(
-                            onPressed: () {
-                              // launchUrl(url);
+                          onPressed: () => setState(
+                            () {
+                              launchUrl(url);
                             },
-                            child: Text('انقر للتسجيل'),
-                            style: TextButton.styleFrom(backgroundColor: Colors.orange[200], shape: StadiumBorder()),
-                          )
-                        ],
-                      ),
-                    ))
+                          ),
+                          child: Text('لمزيد من المعلومات '),
+                          style: TextButton.styleFrom(backgroundColor: Colors.pink[200], shape: StadiumBorder()),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 5, left: 10, bottom: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.pink,
+                          width: 2,
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(offset: const Offset(0, 5), color: Theme.of(context).primaryColor.withOpacity(.2), spreadRadius: 2, blurRadius: 5)
+                        ]),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Icon(
+                              Icons.child_care_outlined,
+                              color: Colors.pink[200],
+                            )
+                            //Icon( CupertinoIcons.card, color: Colors.lime,size: 100,),
+                            ),
+                        const SizedBox(
+                          height: 5,
+                          width: 300,
+                        ),
+                        Text(" مركز التواصل الشامل ",
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blue,
+                            )),
+                        ElevatedButton(
+                          onPressed: () {
+                            launchUrl(url2);
+                          },
+                          child: Text('لمزيد من المعلومات'),
+                          style: TextButton.styleFrom(backgroundColor: Colors.pink[200], shape: StadiumBorder()),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 5, left: 10, bottom: 50),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.pink,
+                          width: 2,
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(offset: const Offset(0, 5), color: Theme.of(context).primaryColor.withOpacity(.2), spreadRadius: 2, blurRadius: 5)
+                        ]),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Icon(
+                              Icons.child_care_outlined,
+                              color: Colors.pink[200],
+                            )
+                            //Icon( CupertinoIcons.card, color: Colors.lime,size: 100,),
+                            ),
+                        const SizedBox(
+                          height: 5,
+                          width: 300,
+                        ),
+                        Text(" مركز مطمئنة ",
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.pink[200],
+                            )),
+                        ElevatedButton(
+                          onPressed: () {
+                            launchUrl(url3);
+                          },
+                          child: Text('لمزيد من المعلومات'),
+                          style: TextButton.styleFrom(backgroundColor: Colors.pink[200], shape: StadiumBorder()),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                // Padding(
+                //     padding: const EdgeInsets.only(right: 5, left: 10, top: 20, bottom: 50),
+                //     child: Container(
+                //       decoration: BoxDecoration(
+                //           border: Border.all(
+                //             color: Colors.orange,
+                //             width: 2,
+                //           ),
+                //           color: Colors.white,
+                //           borderRadius: BorderRadius.circular(10),
+                //           boxShadow: [
+                //             BoxShadow(
+                //                 offset: const Offset(0, 5), color: Theme.of(context).primaryColor.withOpacity(.2), spreadRadius: 2, blurRadius: 5)
+                //           ]),
+                //
+                //     ))
               ],
             ),
           ),
@@ -256,7 +214,7 @@ class _trainState extends State<train> {
       height: height,
       child: Stack(
         children: <Widget>[
-          // Positioned(top: -height * .15, right: -MediaQuery.of(context).size.width * .4, child: BezierContainer()),
+          Positioned(top: -height * .15, right: -MediaQuery.of(context).size.width * .4, child: BezierContainer()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
@@ -270,7 +228,6 @@ class _trainState extends State<train> {
               ),
             ),
           ),
-          Positioned(top: 40, left: 0, child: _backButton()),
         ],
       ),
     ));

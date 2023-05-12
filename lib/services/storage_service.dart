@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:flutter_quiz/model/account_model.dart';
-import 'package:flutter_quiz/model/quiz_model.dart';
-import 'package:flutter_quiz/model/quiz_question.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '../model/account_model.dart';
+import '../model/quiz_model.dart';
 
 abstract class StorageKeys {
   StorageKeys();

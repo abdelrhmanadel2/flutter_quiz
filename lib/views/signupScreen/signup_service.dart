@@ -1,12 +1,11 @@
 import 'dart:developer';
 
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/model/account_model.dart';
-import 'package:flutter_quiz/model/kid_model.dart';
 import 'package:flutter_quiz/model/response_model.dart';
 import 'package:flutter_quiz/services/api_service.dart';
 import 'package:flutter_quiz/services/services.dart';
-import 'package:flutter_quiz/services/storage_service.dart';
-import 'package:get/get.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class SignupService {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/views/home/home_page.dart';
-import 'package:flutter_quiz/views/profile/profile.dart';
-import 'package:flutter_quiz/views/traningCenter/trinningcentr.dart';
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+
+import '../views/home/home_page.dart';
+import '../views/profile/profile.dart';
+import '../views/traningCenter/trinningcentr.dart';
 
 class Navkid extends StatefulWidget {
   const Navkid({super.key});
@@ -24,15 +26,15 @@ class _NavkidState extends State<Navkid> {
             TabItem(
               icon: Icon(
                 Icons.home,
-                color: Colors.orange,
+                color: Colors.brown,
               ),
               title: 'profile',
             ),
             TabItem(
-              icon: Icon(Icons.card_travel, color: Colors.orange),
+              icon: Icon(Icons.card_travel, color: Colors.brown),
               title: 'home',
             ),
-            TabItem(icon: Icon(Icons.add_circle, color: Colors.orange), title: 'test'),
+            TabItem(icon: Icon(Icons.add_circle, color: Colors.brown), title: 'test'),
           ],
           initialActiveIndex: selectedPage,
           onTap: (int index) {
@@ -41,7 +43,7 @@ class _NavkidState extends State<Navkid> {
             });
           },
           activeColor: Colors.white,
-          backgroundColor: Colors.lime),
+          backgroundColor: Colors.orange),
     );
   }
 }

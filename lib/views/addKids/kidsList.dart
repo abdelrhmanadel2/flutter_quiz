@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/components/input_field_text.dart';
-import 'package:flutter_quiz/views/addKids/kids_list_controller.dart';
-import 'package:flutter_quiz/views/quizPage/quiz_page.dart';
-import 'package:flutter_quiz/views/quizResutHistory/quiz_history.dart';
-import 'package:flutter_quiz/views/welcomePage/welcome.dart';
+
 import 'package:get/get.dart';
+
+import 'package:flutter_quiz/components/input_field_text.dart';
+import '../quizPage/quiz_page.dart';
+import '../quizResutHistory/quiz_history.dart';
+import 'kids_list_controller.dart';
 
 class AddChild extends StatelessWidget {
   const AddChild({super.key});

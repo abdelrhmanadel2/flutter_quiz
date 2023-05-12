@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_quiz/views/signupScreen/signup_service.dart';
+
 import 'package:flutter_quiz/components/nav-forkids.dart';
 import 'package:flutter_quiz/components/nav.dart';
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
 import 'package:flutter_quiz/utils/validation_helper.dart';
-import 'package:flutter_quiz/views/home/home_page.dart';
-import 'package:flutter_quiz/views/home/user_home_pinding.dart';
-import 'package:flutter_quiz/views/signupScreen/signup_service.dart';
-import 'package:get/get.dart';
+import '../home/home_page.dart';
 
 const wrongCode = 'assets/images/wrong_code.png';
 
@@ -98,7 +98,7 @@ class SignupController extends GetxController {
         password: passwordController.text,
         onSuccess: (AccountModel response) {
           Get.find<StorageService>().setAccountData(response);
-          (response.type == "parent") ? Get.off(() => NavParernt()) : Get.off(() => Navkid());
+          Get.off(() => Navkid());
         });
   }
 
@@ -109,7 +109,7 @@ class SignupController extends GetxController {
         password: passwordController.text,
         onSuccess: (response) {
           Get.find<StorageService>().setAccountData(response);
-          Get.off(() => HomePage());
+          Get.off(() => NavParernt());
         });
   }
 

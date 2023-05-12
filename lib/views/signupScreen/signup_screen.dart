@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_quiz/views/signupScreen/signup_controller.dart';
+
 import 'package:flutter_quiz/components/background.dart';
 import 'package:flutter_quiz/components/input_field_text.dart';
-import 'package:flutter_quiz/views/loginScreen/login_screen.dart';
-import 'package:flutter_quiz/views/signupScreen/signup_controller.dart';
-import 'package:get/get.dart';
+import '../loginScreen/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -99,7 +100,7 @@ class SignupScreen extends StatelessWidget {
                             ),
                           const SizedBox(height: 20),
                           CustomInputfield(
-                            labelText: "الرقم السري",
+                            labelText: "كلمة المرور",
                             controller: controller.passwordController,
                             validator: controller.validatePassword,
                             // isAutoValidate: true,
@@ -111,7 +112,7 @@ class SignupScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           CustomInputfield(
-                            labelText: "تأكيد الرقم السري",
+                            labelText: "تأكيد كلمة المرور",
                             controller: controller.confirmPasswordController,
                             validator: controller.validateConfirmPassword,
                             // isAutoValidate: true,

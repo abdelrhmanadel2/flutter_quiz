@@ -1,5 +1,6 @@
-import 'package:flutter_quiz/model/answer.dart';
-import 'package:flutter_quiz/services/cloude_storage_service.dart';
+
+
+import 'answer.dart';
 
 class QuizQuestions {
   String? sId;

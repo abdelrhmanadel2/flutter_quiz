@@ -6,11 +6,17 @@ class Services {
   static String getKid = "getKid"; //Get
 
   static String authenticate = "authenticate"; //GET
-  static String getUser = "getUser"; //Get
   static String getQuizResult = "getQuizResult"; //Get
+  static String getUser = "getUser"; //Get
+  static String deleteUser = "deleteUser"; //Get
+
   static String addQuizResult = "addQuizResult"; //Post
   static String getUserQuizResults = "getUserQuizResults"; //Get
   static String addCurrentQuiz = "addCurrentQuiz"; //POST
   static String getCurrentQuiz = "getCurrentQuiz"; //Get
   static String deleteCurrentQuiz = "deleteCurrentQuiz"; //Get
+  static String getAllUsers = "getAllUsers"; //Get
+
+
+
 }

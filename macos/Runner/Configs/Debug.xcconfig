@@ -1,2 +1,2 @@
-#include "../../Flutter/Flutter-Debug.xcconfig"
+#include "package:flutter_quiz/Flutter/Flutter-Debug.xcconfig"
 #include "Warnings.xcconfig"

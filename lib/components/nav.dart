@@ -1,8 +1,10 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/views/addKids/kidsList.dart';
-import 'package:flutter_quiz/views/profile/profile.dart';
-import 'package:flutter_quiz/views/traningCenter/trinningcentr.dart';
+
+import '../views/addKids/kidsList.dart';
+import '../views/profile/profile.dart';
+import '../views/traningCenter/trinningcentr.dart';
+
 
 class NavParernt extends StatefulWidget {
   const NavParernt({super.key});
@@ -37,15 +39,16 @@ class _NavParerntState extends State<NavParernt> {
             TabItem(
               icon: Icon(
                 Icons.home,
-                color: Colors.orange,
+                color: Colors.grey,
               ),
-              title: 'profile',
+              title: 'حسابي',
             ),
             TabItem(
-              icon: Icon(Icons.card_travel, color: Colors.orange),
-              title: 'home',
+              icon: Icon(Icons.card_travel, color: Colors.grey),
+              title: 'الاختبار',
             ),
-            TabItem(icon: Icon(Icons.add_circle, color: Colors.orange), title: 'test'),
+            TabItem(icon: Icon(Icons.add_circle,
+                color: Colors.grey), title: 'مراكز الذكاء'),
           ],
           initialActiveIndex: selectedPage,
           onTap: (int index) {
@@ -54,7 +57,7 @@ class _NavParerntState extends State<NavParernt> {
             });
           },
           activeColor: Colors.white,
-          backgroundColor: Colors.lime),
+          backgroundColor: Colors.orange),
     );
   }
 }

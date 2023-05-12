@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/components/app_bar.dart';
-import 'package:flutter_quiz/components/feature_tile.dart';
-import 'package:flutter_quiz/services/theme.dart';
-import 'package:flutter_quiz/views/home/home_contrroller.dart';
-import 'package:flutter_quiz/views/quizPage/quiz_page.dart';
-import 'package:flutter_quiz/views/quizResutHistory/quiz_history.dart';
+
 import 'package:get/get.dart';
+
+import 'package:flutter_quiz/components/feature_tile.dart';
+import '../quizResutHistory/quiz_history.dart';
+import 'home_contrroller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -34,20 +33,53 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FeatureTile(
-              leadingIcon: Icons.quiz_outlined,
-              title: "Strat Quiz",
-              navigation: controller.navigate,
+            Padding(
+              padding: const EdgeInsets.only(left: 55),
+              child: ElevatedButton(
+                onPressed: () {
+                  controller.navigate();
+                },
+                child: Text(
+                  "ابدا الاختبار",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 50,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
             ),
-            FeatureTile(
-              leadingIcon: Icons.history,
-              title: "Quiz History",
-              navigation: () => Get.to(() => QuizHistoryPage(
-                    user: controller.kid!.sId!,
-                  )),
+            Padding(
+              padding: const EdgeInsets.only(left: 55),
+              child: SizedBox(
+                width: 240,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => QuizHistoryPage(
+                          user: controller.kid!.sId!,
+                        ));
+                  },
+                  child: Text(
+                    "النتيجه",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                ),
+              ),
             ),
             const SizedBox(
               height: 20,
@@ -58,3 +90,31 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+// FeatureTile(
+            //   leadingIcon: Icons.quiz_outlined,
+            //   title: "ابدا الاختبار",
+            //   navigation: controller.navigate,
+            // ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+
+            // Container(color: Colors.indigo,
+            //   child: SizedBox(height: 100,width: 300,
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(top:25,right: 30),
+            //       child: FeatureTile(
+            //         leadingIcon: Icons.history,
+            //         title: "الدرجات",
+            //         navigation: () => Get.to(() => QuizHistoryPage(
+            //               user: controller.kid!.sId!,
+            //             )),
+            //       ),
+            //     ),
+            //   ),
+            // ),

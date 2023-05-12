@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/model/iq_result.dart';
 import 'package:flutter_quiz/model/quiz_model.dart';
 import 'package:flutter_quiz/model/quiz_question.dart';
@@ -5,7 +7,6 @@ import 'package:flutter_quiz/model/response_model.dart';
 import 'package:flutter_quiz/services/api_service.dart';
 import 'package:flutter_quiz/services/services.dart';
 import 'package:flutter_quiz/utils/utils.dart';
-import 'package:get/get.dart';
 
 class QuizService {
   static ApiService api = ApiService();

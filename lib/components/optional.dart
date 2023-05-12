@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/model/answer.dart';
+
+import '../model/answer.dart';
 
 class AnswerWidget extends StatefulWidget {
   const AnswerWidget({

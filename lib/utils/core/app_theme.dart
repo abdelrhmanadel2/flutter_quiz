@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_quiz/services/theme.dart';
-import 'package:flutter_quiz/utils/core/app_color.dart';
-import 'package:flutter_quiz/utils/core/color_schemes.g.dart';
+import 'app_color.dart';
+import 'color_schemes.g.dart';
 
 class AppTheme {
   const AppTheme._();

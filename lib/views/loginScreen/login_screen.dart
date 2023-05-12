@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/components/app_bar.dart';
+
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/components/background.dart';
 import 'package:flutter_quiz/components/input_field_text.dart';
 import 'package:flutter_quiz/utils/utils.dart';
-import 'package:flutter_quiz/views/loginScreen/login_controller.dart';
-import 'package:flutter_quiz/views/signupScreen/signup_screen.dart';
-import 'package:get/get.dart';
+import '../signupScreen/signup_screen.dart';
+import 'login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -28,6 +29,7 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          const SizedBox(height: 100),
                           RichText(
                               textAlign: TextAlign.center,
                               text: TextSpan(
@@ -55,16 +57,14 @@ class LoginScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 20),
                           CustomInputfield(
-                            labelText: "الرقم السري",
+                            labelText: "كلمة المرور",
                             controller: controller.passwordController,
                             validator: controller.validatePassword,
                             // isAutoValidate: true,
                             obsecure: !controller.visiblePsd,
                             keyboardType: TextInputType.visiblePassword,
                           ),
-                          const SizedBox(height: 22),
-                          const SizedBox(height: 22),
-                          const SizedBox(height: 25),
+                          const SizedBox(height: 66),
                           Center(
                             child: SizedBox(
                               width: Get.width * 0.5,

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_quiz/services/storage_service.dart';
-import 'package:flutter_quiz/utils/utils.dart';
 import 'package:get/get.dart' hide Response, FormData;
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:quickalert/quickalert.dart';
+
+import '../utils/utils.dart';
 
 class ApiService extends GetxService {
   static final ApiService _apiUtil = ApiService._();
@@ -18,7 +18,7 @@ class ApiService extends GetxService {
 
   void init() {
     // dio.options.baseUrl = "https://seal-app-njkkz.ondigitalocean.app/api/v1/";
-    dio.options.baseUrl = "http://192.168.1.7:3801/";
+    dio.options.baseUrl = "http://192.168.1.7:4001/";
     dio.options.connectTimeout = Duration(milliseconds: 5000);
     dio.options.receiveTimeout = Duration(milliseconds: 200000);
     dio.interceptors.add(PrettyDioLogger(

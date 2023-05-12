@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_quiz/model/account_model.dart';
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/model/iq_result.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
-import 'package:flutter_quiz/views/quizPage/quiz_service.dart';
-import 'package:get/get.dart';
+import '../quizPage/quiz_service.dart';
 
 class ResultHistoryController extends GetxController {
   String user;

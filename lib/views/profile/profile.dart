@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
+import 'package:get/get.dart';
+
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
-import 'package:flutter_quiz/views/loginScreen/login_screen.dart';
-import 'package:get/get.dart';
+import '../loginScreen/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -33,31 +34,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 150),
 
-            Align(
-              alignment: AlignmentDirectional.bottomEnd,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: OutlinedButton(
-                    onPressed: () {
-                      widget.logOut();
-                    },
-                    child: const Text("تسجيل الخروج")),
-              ),
-            ),
             AdvancedAvatar(
               name: record?.name ?? "Unknown",
               // radius: 70,
             ),
             const SizedBox(height: 20),
-            itemProfile('Name', record?.name ?? "Unknown", CupertinoIcons.person),
+            itemProfile('اسم المستخدم', record?.name ?? "Unknown", CupertinoIcons.person),
             const SizedBox(height: 10),
-            itemProfile('Email', record?.email ?? "Unknown", CupertinoIcons.mail),
+            itemProfile('الايميل', record?.email ?? "Unknown", CupertinoIcons.mail),
             const SizedBox(
               height: 20,
             ),
             const SizedBox(height: 10),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: OutlinedButton(
+                  onPressed: () {
+                    widget.logOut();
+                  },
+                  child: const Text("تسجيل الخروج")),
+            ),
             // SizedBox(
             //   width: double.infinity,
             //   child: ElevatedButton(
@@ -83,7 +82,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text(title),
         subtitle: Text(subtitle),
         leading: Icon(iconData),
-        trailing: Icon(Icons.arrow_forward, color: Colors.grey.shade400),
         tileColor: Colors.white,
       ),
     );

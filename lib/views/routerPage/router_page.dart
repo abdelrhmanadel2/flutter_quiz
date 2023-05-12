@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_quiz/components/navAdmin.dart';
+
 import 'package:flutter_quiz/components/loading_request_widget.dart';
 import 'package:flutter_quiz/components/nav-forkids.dart';
 import 'package:flutter_quiz/components/nav.dart';
 import 'package:flutter_quiz/model/account_model.dart';
 import 'package:flutter_quiz/services/storage_service.dart';
-import 'package:flutter_quiz/views/home/home_page.dart';
-import 'package:flutter_quiz/views/home/user_home_pinding.dart';
-import 'package:flutter_quiz/views/loginScreen/login_screen.dart';
-import 'package:flutter_quiz/views/loginScreen/login_service.dart';
-import 'package:flutter_quiz/views/welcomePage/welcome.dart';
-import 'package:get/get.dart';
+import '../loginScreen/login_service.dart';
+import '../welcomePage/welcome.dart';
 
 class RouterPage extends StatefulWidget {
   const RouterPage({Key? key}) : super(key: key);
@@ -56,6 +55,14 @@ class _RouterPageState extends State<RouterPage> {
   getUserAccess() async {
     await LoginService.authenticateById(
         id: _storage.accountData?.sId,
-        onSuccess: (AccountModel data) async => {(data.type == "parent") ? Get.off(() => NavParernt()) : Get.off(() => Navkid())});
+        onSuccess: (AccountModel data) async {
+          if (data.type == "admin")
+            Get.off(() => NavAdmin());
+          else if (data.type == "parent") {
+            Get.off(() => NavParernt());
+          } else if (data.type == "kids") {
+            Get.off(() => Navkid());
+          }
+        });
   }
 }
