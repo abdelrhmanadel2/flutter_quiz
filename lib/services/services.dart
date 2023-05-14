@@ -9,6 +9,7 @@ class Services {
   static String getQuizResult = "getQuizResult"; //Get
   static String getUser = "getUser"; //Get
   static String deleteUser = "deleteUser"; //Get
+  static String updateUserName = "updateUserName"; //Get
 
   static String addQuizResult = "addQuizResult"; //Post
   static String getUserQuizResults = "getUserQuizResults"; //Get
@@ -16,7 +17,4 @@ class Services {
   static String getCurrentQuiz = "getCurrentQuiz"; //Get
   static String deleteCurrentQuiz = "deleteCurrentQuiz"; //Get
   static String getAllUsers = "getAllUsers"; //Get
-
-
-
 }

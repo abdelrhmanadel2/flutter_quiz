@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
+import 'package:flutter_quiz/views/profile/editProfile.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_quiz/model/account_model.dart';
@@ -57,6 +58,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                   child: const Text("تسجيل الخروج")),
             ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.to(EditProfileScreen())?.then((value) => setState(() {
+                        record = Get.find<StorageService>().accountData;
+                      }));
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(15),
+                ),
+                child: const Text('تعديل الملف الشخصي'),
+              ),
+            )
+
             // SizedBox(
             //   width: double.infinity,
             //   child: ElevatedButton(
